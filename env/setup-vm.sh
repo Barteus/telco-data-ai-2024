@@ -20,5 +20,3 @@ kubectl get po -A
 
 juju bootstrap localhost
 juju add-k8s mk8s --cluster-name=microk8s-cluster
-
-

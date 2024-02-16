@@ -1,0 +1,506 @@
+bundle: kubernetes
+applications:
+  admission-webhook:
+    charm: admission-webhook
+    channel: 1.8/stable
+    revision: 275
+    series: focal
+    resources:
+      oci-image: 278
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  argo-controller:
+    charm: argo-controller
+    channel: 3.3.10/stable
+    revision: 398
+    series: focal
+    resources:
+      oci-image: 348
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  dex-auth:
+    charm: dex-auth
+    channel: 2.36/stable
+    revision: 358
+    series: focal
+    resources:
+      oci-image: 452
+    scale: 1
+    options:
+      public-url: http://10.64.140.43.nip.io
+      static-password: admin
+      static-username: admin
+    constraints: arch=amd64
+    trust: true
+  envoy:
+    charm: envoy
+    channel: 2.0/stable
+    revision: 101
+    series: focal
+    resources:
+      oci-image: 101
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  istio-ingressgateway:
+    charm: istio-gateway
+    channel: 1.17/stable
+    revision: 723
+    series: focal
+    scale: 1
+    options:
+      kind: ingress
+    constraints: arch=amd64
+    trust: true
+  istio-pilot:
+    charm: istio-pilot
+    channel: 1.17/stable
+    revision: 711
+    series: focal
+    scale: 1
+    options:
+      default-gateway: kubeflow-gateway
+    constraints: arch=amd64
+    trust: true
+  jupyter-controller:
+    charm: jupyter-controller
+    channel: 1.8/stable
+    revision: 824
+    series: focal
+    resources:
+      oci-image: 998
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  jupyter-ui:
+    charm: jupyter-ui
+    channel: 1.8/stable
+    revision: 746
+    series: focal
+    resources:
+      oci-image: 747
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  katib-controller:
+    charm: katib-controller
+    channel: 0.16/stable
+    revision: 446
+    series: focal
+    resources:
+      oci-image: 680
+    scale: 1
+    constraints: arch=amd64
+  katib-db:
+    charm: mysql-k8s
+    channel: 8.0/stable
+    revision: 113
+    resources:
+      mysql-image: 103
+    scale: 1
+    constraints: arch=amd64 mem=2048
+    storage:
+      database: kubernetes,1,1024M
+    trust: true
+  katib-db-manager:
+    charm: katib-db-manager
+    channel: 0.16/stable
+    revision: 411
+    series: focal
+    resources:
+      oci-image: 415
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  katib-ui:
+    charm: katib-ui
+    channel: 0.16/stable
+    revision: 422
+    series: focal
+    resources:
+      oci-image: 663
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  kfp-api:
+    charm: kfp-api
+    channel: 2.0/stable
+    revision: 1035
+    series: focal
+    resources:
+      oci-image: 1037
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  kfp-db:
+    charm: mysql-k8s
+    channel: 8.0/stable
+    revision: 113
+    resources:
+      mysql-image: 103
+    scale: 1
+    constraints: arch=amd64 mem=2048
+    storage:
+      database: kubernetes,1,1024M
+    trust: true
+  kfp-metadata-writer:
+    charm: kfp-metadata-writer
+    channel: 2.0/stable
+    revision: 118
+    series: focal
+    resources:
+      oci-image: 100
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  kfp-persistence:
+    charm: kfp-persistence
+    channel: 2.0/stable
+    revision: 1039
+    series: focal
+    resources:
+      oci-image: 1028
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  kfp-profile-controller:
+    charm: kfp-profile-controller
+    channel: 2.0/stable
+    revision: 998
+    series: focal
+    resources:
+      oci-image: 983
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  kfp-schedwf:
+    charm: kfp-schedwf
+    channel: 2.0/stable
+    revision: 1052
+    series: focal
+    resources:
+      oci-image: 1038
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  kfp-ui:
+    charm: kfp-ui
+    channel: 2.0/stable
+    revision: 1034
+    series: focal
+    resources:
+      ml-pipeline-ui: 291
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  kfp-viewer:
+    charm: kfp-viewer
+    channel: 2.0/stable
+    revision: 1064
+    series: focal
+    resources:
+      kfp-viewer-image: 317
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  kfp-viz:
+    charm: kfp-viz
+    channel: 2.0/stable
+    revision: 985
+    series: focal
+    resources:
+      oci-image: 972
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  knative-eventing:
+    charm: knative-eventing
+    channel: 1.10/stable
+    revision: 353
+    series: focal
+    scale: 1
+    options:
+      namespace: knative-eventing
+    constraints: arch=amd64
+    trust: true
+  knative-operator:
+    charm: knative-operator
+    channel: 1.10/stable
+    revision: 328
+    series: focal
+    resources:
+      knative-operator-image: 336
+      knative-operator-webhook-image: 206
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  knative-serving:
+    charm: knative-serving
+    channel: 1.10/stable
+    revision: 354
+    series: focal
+    scale: 1
+    options:
+      istio.gateway.name: kubeflow-gateway
+      istio.gateway.namespace: kubeflow
+      namespace: knative-serving
+    constraints: arch=amd64
+    trust: true
+  kserve-controller:
+    charm: kserve-controller
+    channel: 0.11/stable
+    revision: 435
+    series: focal
+    resources:
+      kserve-controller-image: 439
+      kube-rbac-proxy-image: 438
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  kubeflow-dashboard:
+    charm: kubeflow-dashboard
+    channel: 1.8/stable
+    revision: 454
+    series: focal
+    resources:
+      oci-image: 678
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  kubeflow-profiles:
+    charm: kubeflow-profiles
+    channel: 1.8/stable
+    revision: 355
+    series: focal
+    resources:
+      kfam-image: 570
+      profile-image: 568
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  kubeflow-roles:
+    charm: kubeflow-roles
+    channel: 1.8/stable
+    revision: 187
+    series: focal
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  kubeflow-volumes:
+    charm: kubeflow-volumes
+    channel: 1.8/stable
+    revision: 260
+    series: focal
+    resources:
+      oci-image: 260
+    scale: 1
+    constraints: arch=amd64
+  metacontroller-operator:
+    charm: metacontroller-operator
+    channel: 3.0/stable
+    revision: 226
+    series: focal
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  minio:
+    charm: minio
+    channel: ckf-1.8/stable
+    revision: 258
+    series: focal
+    resources:
+      oci-image: 540
+    scale: 1
+    constraints: arch=amd64
+    storage:
+      minio-data: kubernetes,1,10240M
+  mlflow-mysql:
+    charm: mysql-k8s
+    channel: 8.0/stable
+    revision: 113
+    resources:
+      mysql-image: 103
+    scale: 1
+    constraints: arch=amd64
+    storage:
+      database: kubernetes,1,1024M
+    trust: true
+  mlflow-server:
+    charm: mlflow-server
+    channel: 2.1/stable
+    revision: 466
+    series: focal
+    resources:
+      exporter-oci-image: 154
+      oci-image: 463
+    scale: 1
+    constraints: arch=amd64
+  mlmd:
+    charm: mlmd
+    channel: 1.14/stable
+    revision: 127
+    series: focal
+    resources:
+      oci-image: 130
+    scale: 1
+    constraints: arch=amd64
+    storage:
+      mlmd-data: kubernetes,1,10240M
+  oidc-gatekeeper:
+    charm: oidc-gatekeeper
+    channel: ckf-1.8/stable
+    revision: 294
+    series: focal
+    resources:
+      oci-image: 428
+    scale: 1
+    options:
+      public-url: http://10.64.140.43.nip.io
+    constraints: arch=amd64
+    trust: true
+  pvcviewer-operator:
+    charm: pvcviewer-operator
+    channel: 1.8/stable
+    revision: 30
+    series: focal
+    resources:
+      oci-image: 32
+      oci-image-proxy: 12
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  resource-dispatcher:
+    charm: resource-dispatcher
+    channel: 1.0/stable
+    revision: 93
+    series: focal
+    resources:
+      oci-image: 92
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  seldon-controller-manager:
+    charm: seldon-core
+    channel: 1.17/stable
+    revision: 590
+    series: focal
+    resources:
+      oci-image: 695
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  tensorboard-controller:
+    charm: tensorboard-controller
+    channel: 1.8/stable
+    revision: 257
+    series: focal
+    resources:
+      tensorboard-controller-image: 81
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  tensorboards-web-app:
+    charm: tensorboards-web-app
+    channel: 1.8/stable
+    revision: 245
+    series: focal
+    resources:
+      tensorboards-web-app-image: 56
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+  training-operator:
+    charm: training-operator
+    channel: 1.7/stable
+    revision: 330
+    series: focal
+    resources:
+      training-operator-image: 347
+    scale: 1
+    constraints: arch=amd64
+    trust: true
+relations:
+- - argo-controller:object-storage
+  - minio:object-storage
+- - dex-auth:oidc-client
+  - oidc-gatekeeper:oidc-client
+- - istio-pilot:ingress
+  - dex-auth:ingress
+- - istio-pilot:ingress
+  - envoy:ingress
+- - istio-pilot:ingress
+  - jupyter-ui:ingress
+- - istio-pilot:ingress
+  - katib-ui:ingress
+- - istio-pilot:ingress
+  - kfp-ui:ingress
+- - istio-pilot:ingress
+  - kubeflow-dashboard:ingress
+- - istio-pilot:ingress
+  - kubeflow-volumes:ingress
+- - istio-pilot:ingress
+  - oidc-gatekeeper:ingress
+- - istio-pilot:ingress-auth
+  - oidc-gatekeeper:ingress-auth
+- - istio-pilot:istio-pilot
+  - istio-ingressgateway:istio-pilot
+- - istio-pilot:ingress
+  - tensorboards-web-app:ingress
+- - istio-pilot:gateway-info
+  - tensorboard-controller:gateway-info
+- - katib-db-manager:relational-db
+  - katib-db:database
+- - kfp-api:relational-db
+  - kfp-db:database
+- - kfp-api:kfp-api
+  - kfp-persistence:kfp-api
+- - kfp-api:kfp-api
+  - kfp-ui:kfp-api
+- - kfp-api:kfp-viz
+  - kfp-viz:kfp-viz
+- - kfp-api:object-storage
+  - minio:object-storage
+- - kfp-profile-controller:object-storage
+  - minio:object-storage
+- - kfp-ui:object-storage
+  - minio:object-storage
+- - kserve-controller:ingress-gateway
+  - istio-pilot:gateway-info
+- - kserve-controller:local-gateway
+  - knative-serving:local-gateway
+- - kubeflow-profiles:kubeflow-profiles
+  - kubeflow-dashboard:kubeflow-profiles
+- - kubeflow-dashboard:links
+  - jupyter-ui:dashboard-links
+- - kubeflow-dashboard:links
+  - katib-ui:dashboard-links
+- - kubeflow-dashboard:links
+  - kfp-ui:dashboard-links
+- - kubeflow-dashboard:links
+  - kubeflow-volumes:dashboard-links
+- - kubeflow-dashboard:links
+  - tensorboards-web-app:dashboard-links
+- - mlmd:grpc
+  - envoy:grpc
+- - mlmd:grpc
+  - kfp-metadata-writer:grpc
+- - mlflow-server:secrets
+  - resource-dispatcher:secrets
+- - mlflow-server:pod-defaults
+  - resource-dispatcher:pod-defaults
+- - mlflow-server:object-storage
+  - minio:object-storage
+- - mlflow-server:relational-db
+  - mlflow-mysql:database
+- - istio-pilot:ingress
+  - mlflow-server:ingress
+- - kubeflow-dashboard:links
+  - mlflow-server:dashboard-links
+- - kserve-controller:service-accounts
+  - resource-dispatcher:service-accounts
+- - kserve-controller:secrets
+  - resource-dispatcher:secrets
+- - kserve-controller:object-storage
+  - minio:object-storage
