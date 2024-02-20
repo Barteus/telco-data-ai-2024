@@ -15,7 +15,6 @@ export AWS_SECRET_KEY=O6BN9GTPFF4HGKURIZ83U8HKY3RBLE
 
 spark-client.service-account-registry create \
   --username spark --namespace admin \
-  --properties-file ./spark/s3.conf \
-  --properties-file ./spark/spark-logs.conf
+  --properties-file ./spark.conf
 
 

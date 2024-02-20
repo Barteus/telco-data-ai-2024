@@ -34,9 +34,17 @@ Create a VM with minimum 8 vCPU, 64GB RAM and 150GB disk.
 
 Go to the folder "env" and run commands in the script files:
 
-1. setup-vm.sh
-2. deploy-apps.sh
-3. deploy-cos.sh
+1. [setup-vm.sh](./env/setup-vm.sh)
+2. [deploy-cos.sh](./env/deploy-cos.sh)
+3. [deploy-apps.sh](./env/deploy-apps.sh)
+
+## Enable Spark in Kubeflow user namespace
+
+Log into the Kubeflow Dashboard using credentails: admin / admin
+
+Run enable spark service account in the admin namespace - [enable-spark-ckf.sh](./env/enable-spark-ckf.sh)
+
+Add PodDefaults for Notebook creation using script: [spark-pod-default.sh](./env/spark-pod-default.sh)
 
 # Access
 
