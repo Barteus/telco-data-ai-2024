@@ -54,4 +54,12 @@ Connect to the VM using sshuttle and expose networks
 sshuttle -r ubuntu@0.0.0.0 10.0.0.0/8
 ```
 
-Start spark enabled notebook using image: `docker.io/edeusebio85/charmed-spark-jupyter@sha256:722d027ce6a371d063c8945c808274351ffc49f5368cdf6697394078f46fc29d`
+## Access to Spark enabled notebook
+
+1. Go to Kubeflow Dashboard
+2. Select Notebook tab
+3. Create new notebook
+   1. Custom notebook -> Custom image: `docker.io/edeusebio85/charmed-spark-jupyter@sha256:722d027ce6a371d063c8945c808274351ffc49f5368cdf6697394078f46fc29d`
+   2. Advanced options -> Configurations: select all from drop-down
+4. Go to notebook and create new notebook in Jupyter UI.
+   1. In notebook cell run: `sc` or `spark`
