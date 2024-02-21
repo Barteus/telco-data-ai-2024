@@ -2,7 +2,7 @@ cat <<EOF | kubectl apply -n admin -f -
 apiVersion: kubeflow.org/v1alpha1
 kind: PodDefault
 metadata:
-  name: pyspark2
+  name: pyspark
 spec:
   annotations:
     traffic.sidecar.istio.io/excludeOutboundPorts: 37371,6060
@@ -16,7 +16,7 @@ spec:
   - spark.driver.port=37371
   - --conf
   - spark.blockManager.port=6060
-  desc: Configure Canonical PySpark2
+  desc: Configure Canonical PySpark
   selector:
     matchLabels:
       canonical-pyspark: "true"
