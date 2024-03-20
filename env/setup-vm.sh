@@ -13,10 +13,8 @@ newgrp microk8s # or restart the console
 
 microk8s status
 microk8s enable dns hostpath-storage ingress metallb:10.64.140.43-10.64.140.49 rbac
+microk8s config > ~/.kube/config
 kubectl get po -A
-
-
-#missing switch from sudo to the ubuntu user for microk8s
 
 juju bootstrap localhost
 juju add-k8s mk8s --cluster-name=microk8s-cluster
