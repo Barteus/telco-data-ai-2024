@@ -9,7 +9,7 @@ sudo snap install spark-client --channel 3.4/edge
 export AWS_S3_ENDPOINT=http://minio.kubeflow:9000
 export AWS_S3_BUCKET=history-server
 export AWS_ACCESS_KEY=minio
-export AWS_SECRET_KEY=O6BN9GTPFF4HGKURIZ83U8HKY3RBLE
+export AWS_SECRET_KEY="$(kubectl get secret minio-secret -n kubeflow -oyaml | yq .data.MINIO_SECRET_KEY | base64 -d)"
 
 # Make sure you log into Kubeflow and create "admin" namespace
 
