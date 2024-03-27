@@ -1,9 +1,8 @@
 #!/bin/bash
 
 juju add-model cos mk8s
-juju deploy cos-lite --trust
 
-juju deploy cos-lite \
+juju deploy cos-lite --model cos \
   --trust \
   --overlay ./cos/offers-overlay.yaml \
   --overlay ./cos/storage-small-overlay.yaml
