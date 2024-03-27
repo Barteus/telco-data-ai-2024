@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo snap install yq jq 
+
 sudo snap install juju --channel 3.3/stable
 mkdir -p ~/.local/share/juju
 
