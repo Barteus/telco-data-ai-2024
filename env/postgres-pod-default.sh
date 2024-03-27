@@ -1,9 +1,8 @@
 juju run data-integrator/leader get-credentials -m pg
 
-# update values based on action output
 export PG_HOST=postgresql-k8s-primary.pg.svc.cluster.local:5432
-export PG_USER=relation_id_X
-export PG_PASSWORD=XXX
+export PG_USER="$(juju run data-integrator/leader get-credentials -m pg | yq .postgresql.username)"
+export PG_PASSWORD="$(juju run data-integrator/leader get-credentials -m pg | yq .postgresql.password)"
 export PG_DATABASE=demo-db
 
 
