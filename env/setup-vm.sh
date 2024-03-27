@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo snap install juju --channel 3.1/stable
+sudo snap install juju --channel 3.3/stable
 mkdir -p ~/.local/share/juju
 
 sudo snap install kubectl --classic
