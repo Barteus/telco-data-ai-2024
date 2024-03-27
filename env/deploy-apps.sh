@@ -55,12 +55,13 @@ juju add-model spark mk8s
 # go to Kubeflow Minio and create bucket (history-server) & key (spark-events)
 # you can upload empty file test.txt in s3://history-server/spark-events/test.txt
 kubectl get secret minio-secret -n kubeflow -oyaml
+kubectl get secret minio-secret -n kubeflow -oyaml | yq .data.MINIO_SECRET_KEY | base64 -d
 
 juju deploy spark-history-server-k8s -n1 --channel 3.4/stable
 juju deploy s3-integrator -n1 --channel edge
 juju config s3-integrator bucket="history-server" path="spark-events" endpoint=http://minio.kubeflow:9000/
 # change secret-key based on minio secret above
-juju run s3-integrator/0 sync-s3-credentials access-key=minio secret-key=O6BN9GTPFF4HGKURIZ83U8HKY3RBLE
+juju run s3-integrator/0 sync-s3-credentials access-key=minio secret-key="$(kubectl get secret minio-secret -n kubeflow -oyaml | yq .data.MINIO_SECRET_KEY | base64 -d)"
 juju relate s3-integrator spark-history-server-k8s
 
 juju consume admin/cos.traefik cos-traefik
