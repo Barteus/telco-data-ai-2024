@@ -17,4 +17,4 @@ microk8s config > ~/.kube/config
 kubectl get po -A
 
 juju bootstrap localhost
-juju add-k8s mk8s --cluster-name=microk8s-cluster
+juju add-k8s mk8s --cluster-name=microk8s-cluster --client --controller localhost-localhost
