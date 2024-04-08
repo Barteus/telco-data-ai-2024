@@ -7,7 +7,8 @@ juju deploy cos-lite --model cos \
   --overlay ./cos/offers-overlay.yaml \
   --overlay ./cos/storage-small-overlay.yaml
 
-juju offer cos.traefik:ingress --model cos
+# change model to cos
+juju offer cos.traefik:ingress
 
 juju run traefik/0 show-proxied-endpoints --format=yaml --model cos \
   | yq '."traefik/0".results."proxied-endpoints"' \
